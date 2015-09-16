@@ -16,6 +16,7 @@
     <module>applicationController</module>
     <module>pageController</module>
     <module>frontController</module>
+    <module>twoStep</module>
   </modules>
   <dependencyManagement>
     <dependencies>
