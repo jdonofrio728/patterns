@@ -3,12 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.jad</groupId>
-    <artifactId>jad-patterns-domainModel</artifactId>
+    <groupId>com.jad.patterns</groupId>
+    <artifactId>domainModel-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>com.jad</groupId>
-  <artifactId>jad-patterns-domainModel-dataMapper</artifactId>
+  <artifactId>domainModel-dataMapper</artifactId>
   <version>1.0.0</version>
   <properties>
     <maven.compiler.source>1.7</maven.compiler.source>
@@ -22,8 +21,8 @@
   </dependencyManagement>
   <dependencies>
     <dependency>
-      <groupId>com.jad</groupId>
-      <artifactId>jad-patterns-domainModel-model</artifactId>
+      <groupId>com.jad.patterns</groupId>
+      <artifactId>domainModel-model</artifactId>
       <version>1.0.0</version>
     </dependency>
   </dependencies>

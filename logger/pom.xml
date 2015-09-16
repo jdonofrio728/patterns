@@ -3,11 +3,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.jad</groupId>
-    <artifactId>jad-patterns</artifactId>
+    <groupId>com.jad.patterns</groupId>
+    <artifactId>patterns-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>jad.patterns.log</groupId>
   <artifactId>logger</artifactId>
   <version>1.0.0</version>
   <properties>

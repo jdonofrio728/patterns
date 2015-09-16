@@ -3,12 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>jad.patterns.web</groupId>
-    <artifactId>web</artifactId>
+    <groupId>com.jad.patterns</groupId>
+    <artifactId>web-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>jad.patterns.web.frontc</groupId>
-  <artifactId>frontController</artifactId>
+  <artifactId>web-frontController</artifactId>
   <version>1.0.0</version>
   <packaging>war</packaging>
   <properties>
@@ -22,7 +21,7 @@
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>jad.patterns.log</groupId>
+      <groupId>com.jad.patterns</groupId>
       <artifactId>logger</artifactId>
       <version>1.0.0</version>
     </dependency>

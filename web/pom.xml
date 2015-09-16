@@ -3,12 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.jad</groupId>
-    <artifactId>jad-patterns</artifactId>
+    <groupId>com.jad.patterns</groupId>
+    <artifactId>patterns-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <groupId>jad.patterns.web</groupId>
-  <artifactId>web</artifactId>
+  <artifactId>web-parent</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
   <modules>
@@ -23,7 +22,7 @@
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>javax.servlet-api</artifactId>
-        <version>3.1.0</version>
+        <version>${javax.servlet.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
