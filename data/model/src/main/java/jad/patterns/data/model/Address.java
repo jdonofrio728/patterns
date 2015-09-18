@@ -1,4 +1,4 @@
-package jad.patterns.domain.model;
+package jad.patterns.data.model;
 public class Address extends DomainModel{
     private String street;
     private String city;

@@ -1,4 +1,4 @@
-package jad.patterns.domain.model;
+package jad.patterns.data.model;
 
 /**
  * Created by jdonofrio on 9/7/15.

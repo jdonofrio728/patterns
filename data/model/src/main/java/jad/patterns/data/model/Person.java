@@ -1,4 +1,4 @@
-package jad.patterns.domain.model;
+package jad.patterns.data.model;
 public abstract class Person extends DomainModel{
 
 	private String firstName;

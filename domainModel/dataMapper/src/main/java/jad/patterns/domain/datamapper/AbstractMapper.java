@@ -1,15 +1,14 @@
 package jad.patterns.domain.datamapper;
 
-import jad.patterns.domain.model.DomainModel;
+import jad.patterns.data.model.DomainModel;
+import jad.patterns.data.model.helper.ConnectionHelper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public abstract class AbstractMapper {
+
     protected Connection getConnection(){
-        return null;
+        return ConnectionHelper.createConnection();
     }
     protected abstract String findStatement();
     public DomainModel find(Long id){

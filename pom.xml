@@ -11,11 +11,38 @@
     <module>transactionScript</module>
     <module>web</module>
     <module>logger</module>
+    <module>data</module>
   </modules>
   <properties>
     <javax.servlet.version>3.1.0</javax.servlet.version>
+    <version.tomcat7.plugin>2.2</version.tomcat7.plugin>
+    <version.junit>4.12</version.junit>
+    <version.commons.io>2.4</version.commons.io>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${version.junit}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${version.commons.io}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <build>
     <finalName>patterns</finalName>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>${version.tomcat7.plugin}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>
