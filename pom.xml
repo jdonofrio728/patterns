@@ -12,12 +12,14 @@
     <module>web</module>
     <module>logger</module>
     <module>data</module>
+    <module>base</module>
   </modules>
   <properties>
     <javax.servlet.version>3.1.0</javax.servlet.version>
-    <version.tomcat7.plugin>2.2</version.tomcat7.plugin>
-    <version.junit>4.12</version.junit>
     <version.commons.io>2.4</version.commons.io>
+    <version.junit>4.12</version.junit>
+    <version.tomcat7.plugin>2.2</version.tomcat7.plugin>
+    <version.surefire.plugin>2.18.1</version.surefire.plugin>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -37,6 +39,10 @@
     <finalName>patterns</finalName>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${version.surefire.plugin}</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
           <artifactId>tomcat7-maven-plugin</artifactId>

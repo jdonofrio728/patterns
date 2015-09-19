@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import java.util.logging.Logger;
 
 public class Log {
-    private java.util.logging.Logger l;
+    private Logger l;
 
     private Log(){};
     private Log(String name){

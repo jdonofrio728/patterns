@@ -18,7 +18,10 @@
     <dependency>
       <groupId>com.jad.patterns</groupId>
       <artifactId>model</artifactId>
-      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jad.patterns</groupId>
+      <artifactId>common</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
