@@ -25,6 +25,12 @@
         <artifactId>common</artifactId>
         <version>1.0.0</version>
       </dependency>
+      <dependency>
+        <groupId>jad.patterns.common.test</groupId>
+        <artifactId>testing</artifactId>
+        <version>1.0.0</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>

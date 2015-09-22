@@ -1,46 +1,50 @@
 package jad.patterns.data.model.helper;
 
-import jad.patterns.common.AbstractDBTestCase;
+import jad.patterns.common.test.AbstractDBTestCase;
 import jad.patterns.log.Log;
-import org.apache.commons.io.FileUtils;
 import org.junit.*;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Created by jdonofrio on 9/17/15.
  */
 public class ConnectionHelperTest extends AbstractDBTestCase {
     private static final Log l = Log.getLogger(ConnectionHelperTest.class.getName());
-
+    private static final String TEST_SQL_FILE = "/testdata.sql";
+    private static String url = null;
+    public ConnectionHelperTest() throws Exception{
+        // Initialize DB
+        ConnectionHelper.init();
+        url = getJDBCURL();
+        cleanup();
+    }
 
     @BeforeClass
     public static void setup() throws IOException{
-        ConnectionHelper.init();
+//        ConnectionHelper.init();
     }
 
     @AfterClass
     public static void tearDown() throws IOException{
-        ConnectionHelper.shutdown();
+        if(url != null){
+            ConnectionHelper.shutdown(url);
+        }
     }
 
     @Test
     public void createConnectionTest() throws Exception{
-        Connection c = ConnectionHelper.createConnection();
+        Connection c = ConnectionHelper.createConnection(getJDBCURL());
         assertNotNull(c);
+        loadTestData(c);
         c.close();
     }
 
     @Override
     protected String getTestDataFile() {
-        return null;
+        return TEST_SQL_FILE;
     }
 }

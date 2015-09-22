@@ -24,6 +24,13 @@
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
+      <groupId>java</groupId>
+      <artifactId>derby</artifactId>
+      <version>1.0.0</version>
+      <scope>system</scope>
+      <systemPath>${java.home}/../db/lib/derby.jar</systemPath>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>

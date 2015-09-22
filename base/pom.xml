@@ -13,6 +13,7 @@
   <modules>
     <module>registry</module>
     <module>common</module>
+    <module>testing</module>
   </modules>
   <dependencyManagement>
     <dependencies>

@@ -1,4 +1,4 @@
-package jad.patterns.common;
+package jad.patterns.common.test;
 
 import jad.patterns.log.Log;
 

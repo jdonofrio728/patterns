@@ -1,4 +1,4 @@
-package jad.patterns.common;
+package jad.patterns.common.test;
 
 import jad.patterns.log.Log;
 import org.apache.commons.io.FileUtils;
@@ -7,10 +7,10 @@ import org.junit.BeforeClass;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.Statement;
 
+import org.junit.Assert;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -25,7 +25,7 @@ public abstract class AbstractDBTestCase extends AbstractTestCase{
     private static final String CREATE_DB = ";create=true";
 
     protected String getJDBCURL(){
-        String url =  "jdbc:derby:" + getDBLocation() + ":" + getDBName() + getDBProps();
+        String url =  "jdbc:derby:" + getDBLocation() + getDBProps();
         l.debug("JDBC URL: " + url);
         return url;
     }
@@ -51,13 +51,13 @@ public abstract class AbstractDBTestCase extends AbstractTestCase{
     }
 
     protected void loadTestData(Connection c) throws Exception{
-        assertNotNull(c);
+        Assert.assertNotNull(c);
         URL url = this.getClass().getResource(getTestDataFile());
         File f = new File(url.getFile());
-        assertTrue(f.exists());
+        Assert.assertTrue(f.exists());
         String sqlFile = readFileToString(f);
         for(String sql : sqlFile.split(";")){
-            l.debug("Executing SQL: " + sql);
+            l.info("Executing SQL: " + sql);
             Statement s = c.createStatement();
             s.execute(sql);
             s.close();

@@ -1,6 +1,7 @@
 package jad.patterns.domain.datamapper;
 
 import jad.patterns.common.ApplicationException;
+import jad.patterns.common.ConnectionManager;
 import jad.patterns.data.model.DomainModel;
 import jad.patterns.data.model.helper.ConnectionHelper;
 import jad.patterns.log.Log;
@@ -12,9 +13,28 @@ import java.sql.SQLException;
 
 public abstract class AbstractMapper {
     private static final Log l = Log.getLogger(AbstractMapper.class.getName());
+    private ConnectionManager cm;
+//    protected Connection getConnection(){
+//        return ConnectionHelper.createConnection();
+//    }
+    public AbstractMapper(){
+        cm = ConnectionManager.createInstance();
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        cm.shutdown();
+        super.finalize();
+    }
 
     protected Connection getConnection(){
-        return ConnectionHelper.createConnection();
+        Connection c = null;
+        try {
+            c = cm.createConnection();
+        } catch (SQLException e){
+            l.error(e);
+        }
+        return c;
     }
 
     protected DomainModel abstractFind(Long id){

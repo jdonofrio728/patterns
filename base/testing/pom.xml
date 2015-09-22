@@ -4,10 +4,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.jad.patterns</groupId>
-    <artifactId>data-parent</artifactId>
+    <artifactId>base-parent</artifactId>
     <version>1.0.0</version>
   </parent>
-  <artifactId>model</artifactId>
+  <groupId>jad.patterns.common.test</groupId>
+  <artifactId>testing</artifactId>
   <version>1.0.0</version>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -20,31 +21,15 @@
       <artifactId>logger</artifactId>
     </dependency>
     <dependency>
-      <groupId>java</groupId>
-      <artifactId>derby</artifactId>
-      <version>1.0.0</version>
-      <scope>system</scope>
-      <systemPath>${java.home}/../db/lib/derby.jar</systemPath>
-    </dependency>
-    <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.jad.patterns</groupId>
-      <artifactId>common</artifactId>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>jad.patterns.common.test</groupId>
-      <artifactId>testing</artifactId>
     </dependency>
   </dependencies>
   <build>
-    <finalName>model</finalName>
+    <finalName>testing</finalName>
   </build>
 </project>

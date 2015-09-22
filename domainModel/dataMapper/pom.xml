@@ -24,6 +24,10 @@
       <artifactId>common</artifactId>
     </dependency>
     <dependency>
+      <groupId>jad.patterns.common.test</groupId>
+      <artifactId>testing</artifactId>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>

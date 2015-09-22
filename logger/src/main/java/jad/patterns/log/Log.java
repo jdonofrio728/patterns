@@ -2,29 +2,38 @@ package jad.patterns.log;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.logging.Logger;
 
-public class Log {
-    private Logger l;
+public abstract class Log {
+    // Future use for config file
+    private static final String SECTION = "Log";
+    private static final String LOGGER_CLASS_NAME = "log.classname";
 
-    private Log(){};
-    private Log(String name){
-        this.l = Logger.getLogger(name);
+    // Temp Use
+    private static final String LOGGER_CLASS = "jad.patterns.log.JavaLog";
+
+    protected Log(){};
+    protected Log(String name){}
+
+    public static Log getLogger(String name) {
+        Object log = null;
+        try {
+            log = Class.forName(LOGGER_CLASS).getConstructor(String.class).newInstance(name);
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+        return (Log) log;
     }
-    public static Log getLogger(String name){
-        return new Log(name);
-    }
 
-    public void debug(String msg){l.fine(msg);}
-    public void debug(Throwable t){l.fine(convertException(t));}
-    public void info(String msg){l.info(msg);}
-    public void info(Throwable t){l.info(convertException(t));}
-    public void warning(String msg){l.warning(msg);}
-    public void warning(Throwable t){l.warning(convertException(t));}
-    public void error(String msg){l.severe(msg);}
-    public void error(Throwable t){l.severe(convertException(t));}
+    public abstract void debug(String msg);
+    public abstract void debug(Throwable t);
+    public abstract void info(String msg);
+    public abstract void info(Throwable t);
+    public abstract void warning(String msg);
+    public abstract void warning(Throwable t);
+    public abstract void error(String msg);
+    public abstract void error(Throwable t);
 
-    private String convertException(Throwable t){
+    protected String convertException(Throwable t){
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         t.printStackTrace(pw);
