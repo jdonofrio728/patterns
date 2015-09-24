@@ -22,6 +22,11 @@
         <artifactId>logger</artifactId>
         <version>1.0.0</version>
       </dependency>
+      <dependency>
+        <groupId>org.ini4j</groupId>
+        <artifactId>ini4j</artifactId>
+        <version>${version.ini4j}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>

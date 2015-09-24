@@ -19,6 +19,7 @@
     <version.commons.io>2.4</version.commons.io>
     <version.junit>4.12</version.junit>
     <version.tomcat7.plugin>2.2</version.tomcat7.plugin>
+    <version.ini4j>0.5.4</version.ini4j>
     <version.surefire.plugin>2.18.1</version.surefire.plugin>
   </properties>
   <dependencyManagement>
