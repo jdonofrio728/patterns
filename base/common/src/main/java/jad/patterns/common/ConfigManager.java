@@ -11,8 +11,9 @@ import java.io.FileReader;
 /**
  * Created by jdonofrio on 9/20/15.
  */
-public class ConfigManager {
+public class ConfigManager extends AbstractMBean implements ConfigManagerMBean{
     private static final Log l = Log.getLogger(ConfigManager.class.getName());
+    public static final String NAME = "Type=ConfigManager";
     private static final String PROP_CONFIG_NAME = "jad.patterns.configfile";
     private static ConfigManager instance;
     private Ini configFile;
@@ -34,11 +35,13 @@ public class ConfigManager {
             l.error(msg);
             l.error(e);
         }
+        register();
     }
     public static ConfigManager getInstance() {
         if(instance == null){
             l.info("Initializing ConfigManager");
             instance = new ConfigManager();
+
         }
         return instance;
     }
@@ -53,5 +56,45 @@ public class ConfigManager {
             throw new PropertyNotFoundException("Section: " + section + ", property: " + property + " is missing");
         }
         return value;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
+
+    @Override
+    public Object getObject() {
+        return this;
+    }
+
+    @Override
+    public int countSections() {
+        return configFile.keySet().size();
+    }
+
+    @Override
+    public int countEntriesInSection(String sectionName) {
+        return configFile.get(sectionName).keySet().size();
+    }
+
+    @Override
+    public String[] listSections() {
+        int size = configFile.keySet().size();
+        String[] list = new String[size];
+        for(int i = 0; i < size; i++){
+            list[i] = configFile.keySet().toArray()[i].toString();
+        }
+        return list;
+    }
+
+    @Override
+    public String[] listEntriesInSection(String sectionName) {
+        int size = configFile.get(sectionName).size();
+        String[] list = new String[size];
+        for(int i = 0; i < size; i++){
+            list[i] = configFile.get(sectionName).keySet().toArray()[0].toString();
+        }
+        return list;
     }
 }
