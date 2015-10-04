@@ -2,6 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <name>frontController</name>
   <parent>
     <groupId>com.jad.patterns</groupId>
     <artifactId>web-parent</artifactId>
@@ -27,6 +28,16 @@
       <version>1.0.0</version>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>com.jad.patterns</groupId>
+      <artifactId>model</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jad.patterns</groupId>
+      <artifactId>domain-dataMapper</artifactId>
+      <version>1.0.0</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>frontController</finalName>
@@ -43,7 +54,7 @@
         <artifactId>tomcat7-maven-plugin</artifactId>
         <configuration>
           <systemProperties>
-            <java.util.logging.SimpleFormatter.format>%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %2$s %5$s%6$s%n</java.util.logging.SimpleFormatter.format>
+            <java.util.logging.SimpleFormatter.format>%1$tY-%1$tm-%1$td %1$tH:%1$tM:%1$tS %4$s %3$s %5$s %6$s%n"</java.util.logging.SimpleFormatter.format>
           </systemProperties>
         </configuration>
       </plugin>

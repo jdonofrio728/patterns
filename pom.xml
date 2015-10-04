@@ -10,7 +10,6 @@
     <module>domainModel</module>
     <module>transactionScript</module>
     <module>web</module>
-    <module>logger</module>
     <module>data</module>
     <module>base</module>
   </modules>

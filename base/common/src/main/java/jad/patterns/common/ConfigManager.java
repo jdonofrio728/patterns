@@ -17,10 +17,11 @@ public class ConfigManager extends AbstractMBean implements ConfigManagerMBean{
     private static final String PROP_CONFIG_NAME = "jad.patterns.configfile";
     private static ConfigManager instance;
     private Ini configFile;
+    private String fileName;
 
     private ConfigManager() {
         configFile = new Ini();
-        String fileName = System.getProperty(PROP_CONFIG_NAME);
+        fileName = System.getProperty(PROP_CONFIG_NAME);
         if(fileName == null){
             l.error("Configuration file parameter not set, only defaults will be used");
             return;
@@ -69,8 +70,13 @@ public class ConfigManager extends AbstractMBean implements ConfigManagerMBean{
     }
 
     @Override
-    public int countSections() {
+    public int getSectionCount() {
         return configFile.keySet().size();
+    }
+
+    @Override
+    public String getConfigFileName() {
+        return fileName;
     }
 
     @Override

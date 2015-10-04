@@ -15,6 +15,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 
@@ -25,16 +30,8 @@ public class PatientMapperTest extends AbstractDBTestCase {
     private static final Log l = Log.getLogger(PatientMapperTest.class.getName());
     private static final String TEST_SQL_FILE = "/testdata.sql";
     private static DerbyConnectionManager cm;
-//    private static Connection c;
-//    private boolean flag = false;
-//    private static String url;
 
-    public PatientMapperTest() throws Exception{
-//        cleanup();
-//        ConnectionHelper.init();
-//        url = getJDBCURL();
-
-    }
+    public PatientMapperTest() throws Exception{}
 
     @BeforeClass
     public static void init() throws Exception{
@@ -47,6 +44,9 @@ public class PatientMapperTest extends AbstractDBTestCase {
             FileUtils.deleteDirectory(dir);
         }
         cm.init();
+        Connection c = cm.createConnection();
+        new PatientMapperTest().loadTestData(c);
+        c.close();
     }
 
     @AfterClass
@@ -57,39 +57,81 @@ public class PatientMapperTest extends AbstractDBTestCase {
 
     @Before
     public void setUp() throws Exception {
-//        c = ConnectionHelper.createConnection(getJDBCURL());
-
-
     }
 
     @After
     public void tearDown() throws Exception {
-//        c.close();
-//        cm.shutdown();
     }
 
     @Test
     public void testFindStatement() throws Exception {
-//        String stmnt = new PatientMapper().findStatement();
-//        assertNotNull(stmnt);
-//        assertTrue(stmnt.toUpperCase().contains("SELECT"));
-    }
-
-    @Test
-    public void testDoLoad() throws Exception {
-        Connection c = cm.createConnection();
-        loadTestData(c);
-        c.close();
+        assertNotNull(new PatientMapper().findStatement());
     }
 
     @Test
     public void testFind() throws Exception {
-//        PreparedStatement s = c.prepareStatement("SELECT * FROM PATIENT WHERE ID = ?");
-//        PatientMapper m = new PatientMapper();
-//        Patient p = m.find(2L);
-//        assertNotNull(p);
-//        l.info(p.toString());
-//        assertSame(new Long(2), p.getId());
+        Connection c = cm.createConnection();
+        c.close();
+
+        PatientMapper m = new PatientMapper();
+        Patient p = m.find(1L);
+        assertNotNull(p);
+        l.info(p.toString());
+    }
+
+    @Test
+    public void testInsertStatement() throws Exception{
+        assertNotNull(new PatientMapper().insertStatement());
+    }
+
+    @Test
+    public void testInsert() throws Exception{
+        l.info("Starting test: testInsert()");
+        PatientMapper m = new PatientMapper();
+        Patient p = new Patient();
+        p.setFirstName("Test");
+        p.setMiddleName("Testicular");
+        p.setLastName("Testy");
+        Long id = m.insert(p);
+        l.info("New Patient id: " + id);
+        p = m.find(id);
+        assertNotNull(p);
+        l.info(p.toString());
+        assertEquals(id, p.getId());
+    }
+
+    @Test
+    public void testNextId() throws Exception{
+        PatientMapper m = new PatientMapper();
+        Long id = m.findNextId();
+        l.info("Next available ID: " + id);
+        assertNotNull(id);
+    }
+
+    @Test
+    public void testFindAll() throws Exception{
+        l.info("Starting test: findAll()");
+        PatientMapper m = new PatientMapper();
+        List<Patient> list = m.findAll();
+        for(Patient p : list){
+            l.info(p.toString());
+        }
+    }
+    @Test
+    public void testUpdate() throws Exception{
+        l.info("Starting test: update()");
+        PatientMapper m = new PatientMapper();
+        Patient p = m.find(1L);
+        assertNotNull(p);
+        p.setFirstName("John");
+        p.setMiddleName("Peaches");
+        p.setLastName("Doe");
+        m.update(p);
+        p = m.find(1L);
+        l.info(p.toString());
+        assertEquals("John", p.getFirstName());
+        assertEquals("Peaches", p.getMiddleName());
+        assertEquals("Doe", p.getLastName());
     }
 
     @Override

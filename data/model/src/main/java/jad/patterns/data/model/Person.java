@@ -17,9 +17,11 @@ public abstract class Person extends DomainModel{
 
 	@Override
 	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (firstName != null && !firstName.trim().isEmpty())
-			result += "firstName: " + firstName;
-		return result;
+		return "Person{" +
+				"Id=" + getId() + '\'' +
+				"firstName='" + firstName + '\'' +
+				", middleName='" + middleName + '\'' +
+				", lastName='" + lastName + '\'' +
+				'}';
 	}
 }

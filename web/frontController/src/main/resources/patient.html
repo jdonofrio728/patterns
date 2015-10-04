@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <form action="/web-frontController/patient" method="post" content="application/x-www-form-urlencoded">
+        <input type="hidden" name="id" value="${id}"/>
+        <table>
+            <tr>
+                <td>First Name: </td>
+                <td><input type="text" name="fname" value="${fname}"/></td>
+            </tr>
+            <tr>
+                <td>Middle Name: </td>
+                <td><input type="text" name="mname" value="${mname}"/></td>
+            </tr>
+            <tr>
+                <td>Last Name: </td>
+                <td><input type="text" name="lname" value="${lname}"/></td>
+            </tr>
+            <tr>
+                <td><button type="submit" value="submit">Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
