@@ -5,21 +5,13 @@ import jad.patterns.common.ConnectionManager;
 import jad.patterns.common.DerbyConnectionManager;
 import jad.patterns.common.test.AbstractDBTestCase;
 import jad.patterns.data.model.Patient;
-import jad.patterns.data.model.helper.ConnectionHelper;
 import jad.patterns.log.Log;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
 
 import java.io.File;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import static org.junit.Assert.*;
 

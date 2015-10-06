@@ -4,10 +4,9 @@ import jad.patterns.common.ApplicationException;
 import jad.patterns.common.ConnectionManager;
 import jad.patterns.common.StatementSource;
 import jad.patterns.data.model.DomainModel;
-import jad.patterns.data.model.helper.ConnectionHelper;
+import jad.patterns.domain.datamapper.jad.patterns.domains.datamapper.idmap.AbstractIdentityMap;
 import jad.patterns.log.Log;
 
-import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +39,14 @@ public abstract class AbstractMapper {
         l.info("Finding entity with id " + id);
         Connection c = getConnection();
         try {
+            AbstractIdentityMap identityMap = getIdentityMap();
+            if(identityMap != null){
+                result = identityMap.getObject(id);
+                if(result != null){
+                    l.info("Found cached copy, returning");
+                    return result;
+                }
+            }
             PreparedStatement s = c.prepareStatement(findStatement());
             s.setLong(1, id.longValue());
             l.debug("Executing SQL: " + findStatement());
@@ -62,7 +69,14 @@ public abstract class AbstractMapper {
 
     protected DomainModel load(ResultSet rs) throws SQLException{
         Long id = new Long(rs.getLong(1));
-        return doLoad(id, rs);
+        AbstractIdentityMap identityMap = getIdentityMap();
+        if(identityMap.getObject(id) != null){
+            l.info("Found cached copy, returning");
+            return identityMap.getObject(id);
+        }
+        DomainModel m = doLoad(id, rs);
+        identityMap.putObject(id, m);
+        return m;
     }
 
     public Long insert(DomainModel model){
@@ -75,6 +89,7 @@ public abstract class AbstractMapper {
             s.setLong(1, model.getId());
             doInsert(model, s);
             s.execute();
+            getIdentityMap().putObject(model.getId(), model);
         } catch(SQLException e){
             l.error("Error occurred");
             throw new ApplicationException(e);
@@ -123,4 +138,5 @@ public abstract class AbstractMapper {
     protected abstract String findStatement();
     protected abstract String insertStatement();
     protected abstract void doInsert(DomainModel model, PreparedStatement s);
+    protected abstract AbstractIdentityMap getIdentityMap();
 }

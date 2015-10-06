@@ -5,6 +5,8 @@ import jad.patterns.common.Finder;
 import jad.patterns.common.StatementSource;
 import jad.patterns.data.model.DomainModel;
 import jad.patterns.data.model.Patient;
+import jad.patterns.domain.datamapper.jad.patterns.domains.datamapper.idmap.AbstractIdentityMap;
+import jad.patterns.domain.datamapper.jad.patterns.domains.datamapper.idmap.PatientIdentityMap;
 import jad.patterns.log.Log;
 
 import java.sql.Connection;
@@ -46,6 +48,11 @@ public class PatientMapper extends AbstractMapper implements Finder<Patient>{
         } catch(SQLException e){
             throw new ApplicationException(e);
         }
+    }
+
+    @Override
+    protected AbstractIdentityMap getIdentityMap() {
+        return new PatientIdentityMap();
     }
 
     @Override
@@ -95,6 +102,7 @@ public class PatientMapper extends AbstractMapper implements Finder<Patient>{
             s.setString(3, p.getLastName());
             s.setLong(4, p.getId());
             s.execute();
+            getIdentityMap().putObject(p.getId(), p);
         } catch (SQLException e) {
             throw new ApplicationException(e);
         } finally {
@@ -113,6 +121,7 @@ public class PatientMapper extends AbstractMapper implements Finder<Patient>{
             PreparedStatement s = c.prepareStatement(DELETE);
             s.setLong(1, id);
             s.execute();
+            getIdentityMap().putObject(id, null);
         }catch (SQLException e){
             throw new ApplicationException(e);
         } finally {
